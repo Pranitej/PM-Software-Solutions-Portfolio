@@ -3,26 +3,2188 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="PM Software Solutions builds modern websites, web applications, mobile apps, cloud systems, ecommerce platforms, and automation solutions for growing businesses."
-    />
-    <meta name="theme-color" content="#0B1120" />
-    <meta property="og:title" content="PM Software Solutions" />
-    <meta
-      property="og:description"
-      content="Professional software development, web design, mobile apps, cloud solutions, and digital transformation services."
-    />
+    <title>PM Software Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>PM Software Solutions | Portfolio</title>
+    <script
+      src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+      integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+      integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+      integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #f8f8f6;
+        color: #0d0d12;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection {
+        background: #0d0d12;
+        color: #f8f8f6;
+      }
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f8f8f6;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #d4d4ce;
+        border-radius: 3px;
+      }
+
+      /* ── Layout ── */
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 36px;
+      }
+      .section-pad {
+        padding: 92px 0;
+      }
+
+      /* ── Nav ── */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        transition:
+          background 0.3s,
+          box-shadow 0.3s;
+      }
+      .nav.scrolled {
+        background: rgba(248, 248, 246, 0.93);
+        box-shadow: 0 1px 0 #e4e4df;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        text-decoration: none;
+        color: inherit;
+      }
+      .nav-logo-mark {
+        width: 32px;
+        height: 32px;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .nav-logo-text {
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: -0.02em;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+      .nav-link {
+        font-size: 14px;
+        font-weight: 500;
+        color: #7a7a8a;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-link:hover {
+        color: #0d0d12;
+      }
+      .btn-nav {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 18px;
+        border-radius: 7px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #fff;
+        font-family: inherit;
+        transition:
+          opacity 0.2s,
+          transform 0.15s;
+      }
+      .btn-nav:hover {
+        opacity: 0.87;
+        transform: translateY(-1px);
+      }
+      .btn-hero {
+        display: inline-flex;
+        align-items: center;
+        padding: 13px 28px;
+        border-radius: 9px;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #fff;
+        font-family: inherit;
+        transition:
+          opacity 0.2s,
+          transform 0.15s;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-hero:hover {
+        opacity: 0.87;
+        transform: translateY(-1px);
+      }
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        padding: 13px 28px;
+        border-radius: 9px;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #0d0d12;
+        font-family: inherit;
+        border: 1.5px solid #deded9;
+        background: transparent;
+        transition:
+          border-color 0.2s,
+          background 0.2s,
+          transform 0.15s;
+      }
+      .btn-ghost:hover {
+        border-color: #aaaa a4;
+        background: #fff;
+        transform: translateY(-1px);
+      }
+
+      /* hamburger */
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 4px;
+        background: none;
+        border: none;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 20px;
+        height: 1.5px;
+        background: #0d0d12;
+        transition:
+          transform 0.25s,
+          opacity 0.25s;
+      }
+      .nav-hamburger.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+      }
+      .nav-hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-hamburger.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+      }
+      .mobile-menu {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 199;
+        background: #f8f8f6;
+        display: flex;
+        flex-direction: column;
+        padding: 28px 24px;
+        gap: 2px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+      .mobile-menu.open {
+        transform: translateX(0);
+      }
+      .mobile-menu a {
+        font-size: 20px;
+        font-weight: 600;
+        color: #0d0d12;
+        text-decoration: none;
+        padding: 13px 0;
+        border-bottom: 1px solid #e8e8e4;
+        letter-spacing: -0.02em;
+        transition: color 0.15s;
+      }
+
+      /* ── Hero ── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 96px 0 64px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-dots {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: radial-gradient(circle, #c4c4be 1px, transparent 1px);
+        background-size: 26px 26px;
+        opacity: 0.55;
+      }
+      .hero-glow {
+        position: absolute;
+        top: -15%;
+        right: -8%;
+        width: 55vw;
+        height: 55vw;
+        max-width: 640px;
+        max-height: 640px;
+        pointer-events: none;
+        border-radius: 50%;
+        opacity: 0.06;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 6px 14px;
+        border: 1px solid #e0e0db;
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #7a7a8a;
+        background: #fff;
+        margin-bottom: 22px;
+      }
+      .hero-tag-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .hero-h1 {
+        font-size: clamp(40px, 5.8vw, 72px);
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+        margin-bottom: 18px;
+        text-wrap: balance;
+      }
+      .hero-word {
+        display: inline-block;
+        transition: opacity 0.28s;
+      }
+      .hero-sub {
+        font-size: clamp(16px, 1.8vw, 19px);
+        color: #7a7a8a;
+        max-width: 560px;
+        line-height: 1.75;
+        margin-bottom: 32px;
+      }
+      .hero-ctas {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 60px;
+      }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-top: 1px solid #e4e4df;
+        padding-top: 36px;
+        gap: 0;
+        align-items: start;
+      }
+      .hero-stat {
+        min-width: 0;
+        padding: 0 24px;
+        border-right: 1px solid #e4e4df;
+      }
+      .hero-stat:first-child {
+        padding-left: 0;
+      }
+      .hero-stat:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+      .hero-stat-n {
+        font-size: clamp(28px, 2.9vw, 40px);
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+      .hero-stat-l {
+        font-size: 13px;
+        color: #9090a0;
+        margin-top: 3px;
+      }
+
+      /* ── Section labels ── */
+      .section-label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      .section-h {
+        font-size: clamp(26px, 3.4vw, 46px);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+      }
+      .section-sub {
+        color: #7a7a8a;
+        font-size: 16px;
+        line-height: 1.75;
+        margin-top: 12px;
+        max-width: 560px;
+      }
+
+      /* ── About ── */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+      .about-caps {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .cap-card {
+        padding: 20px 18px;
+        background: #fff;
+        border: 1px solid #e4e4df;
+        border-radius: 12px;
+        transition:
+          border-color 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .cap-card:hover {
+        border-color: #c8c8c4;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      }
+      .cap-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      .cap-title {
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .cap-desc {
+        font-size: 12px;
+        color: #9090a0;
+        line-height: 1.5;
+      }
+      .tech-tags {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+        margin-top: 22px;
+      }
+      .tech-tag {
+        padding: 4px 11px;
+        border: 1px solid #e4e4df;
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #7a7a8a;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .tech-tag:hover {
+        border-color: #b0b0aa;
+        color: #0d0d12;
+      }
+
+      /* ── Process ── */
+      .process-section {
+        position: relative;
+        overflow: hidden;
+        background: #fff;
+        border-top: 1px solid #e4e4df;
+        border-bottom: 1px solid #e4e4df;
+      }
+      .process-dots {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: radial-gradient(circle, #c8c8c2 1px, transparent 1px);
+        background-size: 26px 26px;
+        opacity: 0.45;
+      }
+      .process-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        position: relative;
+        z-index: 1;
+        border: 1px solid #e4e4df;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #e4e4df;
+      }
+      .process-card {
+        background: #fff;
+        padding: 32px 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        transition: background 0.2s;
+        cursor: default;
+      }
+      .process-card:hover {
+        background: #f8f8f6;
+      }
+      .process-num {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: #c8c8c8;
+      }
+      .process-icon-wrap {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .process-title {
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+      }
+      .process-desc {
+        font-size: 13px;
+        color: #7a7a8a;
+        line-height: 1.65;
+      }
+      .process-pills {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 4px;
+      }
+      .process-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: #555568;
+        font-weight: 500;
+      }
+      .process-pill-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .process-connector {
+        display: none;
+      } /* mobile: hidden */
+
+      /* ── Portfolio ── */
+      .portfolio-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 36px;
+      }
+      .portfolio-count {
+        font-size: 13px;
+        color: #9090a0;
+      }
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1px solid #e4e4df;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #e4e4df;
+        gap: 1px;
+      }
+      .proj-card {
+        padding: 24px 22px;
+        background: #fafaf8;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: flex;
+        flex-direction: column;
+      }
+      .proj-card:hover {
+        background: #fff;
+      }
+      .proj-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .proj-type {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #9090a0;
+      }
+      .proj-year {
+        font-size: 11px;
+        color: #c0c0c8;
+      }
+      .proj-title {
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: -0.02em;
+        margin-bottom: 4px;
+        line-height: 1.3;
+      }
+      .proj-client {
+        font-size: 12px;
+        color: #9090a0;
+        margin-bottom: 14px;
+      }
+      .proj-tags {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .proj-tag {
+        padding: 3px 9px;
+        border-radius: 100px;
+        font-size: 11px;
+        font-weight: 500;
+        border: 1px solid transparent;
+      }
+      .proj-cta {
+        margin-top: auto;
+        padding-top: 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+
+      /* ── Testimonials ── */
+      .testi-bg {
+        background: #fff;
+        border-top: 1px solid #e4e4df;
+        border-bottom: 1px solid #e4e4df;
+      }
+      .testi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .testi-card {
+        padding: 28px;
+        border: 1px solid #e4e4df;
+        border-radius: 14px;
+        background: #fafaf8;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s,
+          transform 0.2s;
+      }
+      .testi-card:hover {
+        border-color: #c0c0ba;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+        transform: translateY(-2px);
+      }
+      .testi-quote-mark {
+        font-size: 40px;
+        line-height: 1;
+        font-weight: 700;
+        margin-bottom: 10px;
+        letter-spacing: -0.05em;
+      }
+      .testi-text {
+        color: #555568;
+        font-size: 14px;
+        line-height: 1.75;
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+      .testi-divider {
+        border: none;
+        border-top: 1px solid #e8e8e4;
+        margin-bottom: 14px;
+      }
+      .testi-name {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .testi-role {
+        font-size: 12px;
+        color: #9090a0;
+        margin-top: 2px;
+      }
+
+      /* ── Contact ── */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: start;
+      }
+      .contact-info-items {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 32px;
+      }
+      .contact-info-label {
+        font-size: 10px;
+        color: #9090a0;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+      }
+      .contact-info-val {
+        font-size: 14px;
+        color: #555568;
+      }
+      .contact-form-wrap {
+        background: #fff;
+        border: 1px solid #e4e4df;
+        border-radius: 14px;
+        padding: 30px;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .form-label {
+        font-size: 11px;
+        color: #7a7a8a;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        background: #f8f8f6;
+        border: 1px solid #e4e4df;
+        border-radius: 7px;
+        padding: 10px 13px;
+        color: #0d0d12;
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        background: #fff;
+      }
+      .form-textarea {
+        min-height: 96px;
+        resize: vertical;
+      }
+      .form-select {
+        cursor: pointer;
+      }
+      .form-submit {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        letter-spacing: 0.01em;
+        transition:
+          opacity 0.2s,
+          transform 0.15s;
+        color: #fff;
+        margin-top: 4px;
+      }
+      .form-submit:hover {
+        opacity: 0.87;
+        transform: translateY(-1px);
+      }
+      .success-state {
+        text-align: center;
+        padding: 36px 0;
+      }
+      .success-check {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+      .success-title {
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+      .success-sub {
+        color: #7a7a8a;
+        font-size: 14px;
+      }
+
+      /* ── Footer ── */
+      .footer {
+        border-top: 1px solid #e4e4df;
+        padding: 28px 0;
+      }
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+      .footer-copy {
+        font-size: 12px;
+        color: #b0b0b8;
+      }
+      .footer-links {
+        display: flex;
+        gap: 20px;
+      }
+      .footer-link {
+        color: #9090a0;
+        font-size: 12px;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-link:hover {
+        color: #0d0d12;
+      }
+
+      /* ── Reveal ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ── Tweaks ── */
+      #tweaks-panel {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        background: #fff;
+        border: 1px solid #e0e0db;
+        border-radius: 12px;
+        padding: 18px;
+        width: 220px;
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+      #tweaks-panel.visible {
+        display: flex;
+      }
+      #tweaks-panel h4 {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #9090a0;
+      }
+      .tw-row {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .tw-row label {
+        font-size: 11px;
+        color: #9090a0;
+      }
+      .tw-row select {
+        width: 100%;
+        background: #f8f8f6;
+        border: 1px solid #e4e4df;
+        color: #0d0d12;
+        border-radius: 6px;
+        padding: 5px 8px;
+        font-family: inherit;
+        font-size: 12px;
+        cursor: pointer;
+        outline: none;
+      }
+      .tw-swatches {
+        display: flex;
+        gap: 7px;
+      }
+      .tw-swatch {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2.5px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .tw-swatch.active {
+        border-color: #0d0d12;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 1024px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .process-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .portfolio-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .testi-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .hero-stats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 24px 0;
+        }
+        .hero-stat {
+          padding: 0 24px 0 0;
+        }
+        .hero-stat:nth-child(2n) {
+          padding: 0 0 0 24px;
+          border-right: none;
+        }
+        .hero-stat:nth-child(n + 3) {
+          border-top: 1px solid #e4e4df;
+          padding-top: 24px;
+        }
+        .hero-stat:nth-child(3) {
+          border-right: 1px solid #e4e4df;
+          padding-left: 0;
+        }
+        .hero-stat:last-child {
+          padding-left: 24px;
+          padding-right: 0;
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .nav-hamburger {
+          display: flex;
+        }
+        .section-pad {
+          padding: 56px 0;
+        }
+        .process-grid {
+          grid-template-columns: 1fr;
+        }
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+        }
+        .testi-grid {
+          grid-template-columns: 1fr;
+        }
+        .about-caps {
+          grid-template-columns: 1fr 1fr;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .portfolio-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+        }
+        .footer-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 18px;
+        }
+        .about-caps {
+          grid-template-columns: 1fr;
+        }
+        .hero-stats {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div id="tweaks-panel">
+      <h4>Tweaks</h4>
+      <div class="tw-row">
+        <label>Accent Color</label>
+        <div class="tw-swatches" id="tw-swatches"></div>
+      </div>
+      <div class="tw-row">
+        <label>Card Radius</label>
+        <select id="tw-radius">
+          <option value="14px">Rounded</option>
+          <option value="8px">Subtle</option>
+          <option value="4px">Sharp</option>
+        </select>
+      </div>
+    </div>
+
+    <script type="text/babel">
+      const { useState, useEffect, useRef } = React;
+
+      const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/ {
+        accentIndex: 1,
+        cardRadius: "14px",
+      }; /*EDITMODE-END*/
+
+      const ACCENTS = [
+        { label: "Slate", hex: "#2d2d3a", color: "#2d2d3a" },
+        { label: "Indigo", hex: "#4f46e5", color: "#4f46e5" },
+        { label: "Emerald", hex: "#059669", color: "#059669" },
+        { label: "Rose", hex: "#e11d48", color: "#e11d48" },
+      ];
+
+      function useReveal(delay = 0) {
+        const ref = useRef(null);
+        useEffect(() => {
+          if (!ref.current) return;
+          const el = ref.current;
+          el.classList.add("reveal");
+          const obs = new IntersectionObserver(
+            ([e]) => {
+              if (e.isIntersecting) {
+                setTimeout(() => el.classList.add("visible"), delay);
+                obs.disconnect();
+              }
+            },
+            { threshold: 0.08 },
+          );
+          obs.observe(el);
+          return () => obs.disconnect();
+        }, []);
+        return ref;
+      }
+
+      // ── NAV ──────────────────────────────────────────────────
+      function Nav({ accent, cardRadius }) {
+        const [scrolled, setScrolled] = useState(false);
+        const [open, setOpen] = useState(false);
+        useEffect(() => {
+          const fn = () => setScrolled(window.scrollY > 40);
+          window.addEventListener("scroll", fn, { passive: true });
+          return () => window.removeEventListener("scroll", fn);
+        }, []);
+        const links = ["Home", "About", "Process", "Portfolio", "Testimonials"];
+        const hrefs = {
+          Home: "#home",
+          About: "#about",
+          Process: "#process",
+          Portfolio: "#portfolio",
+          Testimonials: "#testimonials",
+        };
+        return (
+          <>
+            <nav className={`nav${scrolled ? " scrolled" : ""}`}>
+              <div className="container nav-inner">
+                <a href="#home" className="nav-logo">
+                  <div
+                    className="nav-logo-mark"
+                    style={{
+                      background: accent,
+                      borderRadius: cardRadius === "4px" ? "4px" : "8px",
+                    }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                      <rect
+                        x="1"
+                        y="1"
+                        width="5"
+                        height="5"
+                        rx="1"
+                        fill="white"
+                      />
+                      <rect
+                        x="8"
+                        y="1"
+                        width="5"
+                        height="5"
+                        rx="1"
+                        fill="white"
+                        opacity=".5"
+                      />
+                      <rect
+                        x="1"
+                        y="8"
+                        width="5"
+                        height="5"
+                        rx="1"
+                        fill="white"
+                        opacity=".5"
+                      />
+                      <rect
+                        x="8"
+                        y="8"
+                        width="5"
+                        height="5"
+                        rx="1"
+                        fill="white"
+                      />
+                    </svg>
+                  </div>
+                  <span className="nav-logo-text">PM Software Solutions</span>
+                </a>
+                <div className="nav-links">
+                  {links.map((l) => (
+                    <a key={l} href={hrefs[l]} className="nav-link">
+                      {l}
+                    </a>
+                  ))}
+                  <a
+                    href="#contact"
+                    className="btn-nav"
+                    style={{ background: accent, borderRadius: cardRadius }}
+                  >
+                    Contact Us
+                  </a>
+                </div>
+                <button
+                  className={`nav-hamburger${open ? " open" : ""}`}
+                  onClick={() => setOpen(!open)}
+                  aria-label="Menu"
+                >
+                  <span />
+                  <span />
+                  <span />
+                </button>
+              </div>
+            </nav>
+            <div className={`mobile-menu${open ? " open" : ""}`}>
+              {links.map((l) => (
+                <a key={l} href={hrefs[l]} onClick={() => setOpen(false)}>
+                  {l}
+                </a>
+              ))}
+              <div style={{ marginTop: 20 }}>
+                <a
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  style={{
+                    display: "inline-block",
+                    background: accent,
+                    color: "#fff",
+                    padding: "12px 22px",
+                    borderRadius: 9,
+                    fontWeight: 600,
+                    fontSize: 15,
+                    textDecoration: "none",
+                    letterSpacing: "0.01em",
+                  }}
+                >
+                  Contact Us →
+                </a>
+              </div>
+            </div>
+          </>
+        );
+      }
+
+      // ── HERO ─────────────────────────────────────────────────
+      function Hero({ accent }) {
+        const words = ["Scalable", "Intelligent", "Enterprise", "Modern"];
+        const [wIdx, setWIdx] = useState(0);
+        const [fade, setFade] = useState(true);
+        useEffect(() => {
+          const t = setInterval(() => {
+            setFade(false);
+            setTimeout(() => {
+              setWIdx((i) => (i + 1) % words.length);
+              setFade(true);
+            }, 270);
+          }, 2500);
+          return () => clearInterval(t);
+        }, []);
+        return (
+          <section id="home" className="hero">
+            <div className="hero-dots" />
+            <div className="hero-glow" style={{ background: accent }} />
+            <div
+              className="container"
+              style={{ position: "relative", zIndex: 1, width: "100%" }}
+            >
+              <div className="hero-tag">
+                <span className="hero-tag-dot" style={{ background: accent }} />
+                Enterprise Software Engineering
+              </div>
+              <h1 className="hero-h1">
+                We Build&nbsp;
+                <span
+                  className="hero-word"
+                  style={{ color: accent, opacity: fade ? 1 : 0 }}
+                >
+                  {words[wIdx]}
+                </span>
+                <br />
+                Software Systems
+              </h1>
+              <p className="hero-sub">
+                From ReactJS frontends to NodeJS backends and MongoDB databases
+                — we engineer complete, full-stack solutions that scale with
+                your enterprise.
+              </p>
+              <div className="hero-ctas">
+                <a
+                  href="#contact"
+                  className="btn-hero"
+                  style={{ background: accent }}
+                >
+                  Start a Project →
+                </a>
+                <a href="#portfolio" className="btn-ghost">
+                  View Our Work
+                </a>
+              </div>
+              <div className="hero-stats">
+                {[
+                  ["500+", "Projects Delivered"],
+                  ["8+", "Years Experience"],
+                  ["50+", "Enterprise Clients"],
+                  ["99%", "Satisfaction Rate"],
+                ].map(([n, l], i) => (
+                  <div key={i} className="hero-stat">
+                    <div className="hero-stat-n" style={{ color: accent }}>
+                      {n}
+                    </div>
+                    <div className="hero-stat-l">{l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ── ABOUT ────────────────────────────────────────────────
+      function About({ accent, cardRadius }) {
+        const ref = useReveal();
+        return (
+          <section id="about" className="section-pad">
+            <div className="container" ref={ref}>
+              <div className="about-grid">
+                <div>
+                  <div className="section-label" style={{ color: accent }}>
+                    About Us
+                  </div>
+                  <h2 className="section-h">
+                    Engineering excellence
+                    <br />
+                    since day one
+                  </h2>
+                  <p className="section-sub">
+                    PM Software Solutions is a full-stack engineering firm
+                    dedicated to building robust, scalable systems for
+                    enterprise clients. We combine deep technical expertise with
+                    strategic product thinking.
+                  </p>
+                  <p
+                    style={{
+                      color: "#7a7a8a",
+                      fontSize: 14,
+                      lineHeight: 1.75,
+                      marginTop: 12,
+                    }}
+                  >
+                    Our multidisciplinary teams span frontend, backend, database
+                    architecture, and DevOps — delivering complete solutions
+                    from concept to production.
+                  </p>
+                  <div className="tech-tags">
+                    {[
+                      "React",
+                      "NextJS",
+                      "NodeJS",
+                      "Spring Boot",
+                      "MongoDB",
+                      "SQL",
+                    ].map((t) => (
+                      <span key={t} className="tech-tag">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="about-caps">
+                  {[
+                    {
+                      title: "Full-Stack",
+                      desc: "End-to-end development from UI to infrastructure.",
+                    },
+                    {
+                      title: "Scalable",
+                      desc: "Architectures designed to grow with your business.",
+                    },
+                    {
+                      title: "Secure",
+                      desc: "Enterprise-grade security baked into every layer.",
+                    },
+                    {
+                      title: "Fast",
+                      desc: "Performance-first engineering at every level.",
+                    },
+                  ].map((c, i) => (
+                    <div
+                      key={i}
+                      className="cap-card"
+                      style={{ borderRadius: cardRadius }}
+                    >
+                      <div
+                        className="cap-icon"
+                        style={{ background: `${accent}14`, borderRadius: 7 }}
+                      >
+                        <div
+                          style={{
+                            width: 10,
+                            height: 10,
+                            background: accent,
+                            borderRadius: 2,
+                          }}
+                        />
+                      </div>
+                      <div className="cap-title">{c.title}</div>
+                      <div className="cap-desc">{c.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ── PROCESS ──────────────────────────────────────────────
+      const PROCESS_STEPS = [
+        {
+          num: "01",
+          title: "Discovery\n& Planning",
+          desc: "We start by deeply understanding your business goals, technical constraints, and user needs to define a clear project roadmap.",
+          pills: [
+            "Requirements gathering",
+            "Architecture planning",
+            "Timeline & scope",
+          ],
+          icon: (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle
+                cx="10"
+                cy="10"
+                r="7"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+              <path
+                d="M10 6v4l3 3"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+            </svg>
+          ),
+        },
+        {
+          num: "02",
+          title: "Design\n& Architecture",
+          desc: "Our engineers design the system architecture and UI foundations — choosing the right tech stack and ensuring scalability from day one.",
+          pills: ["System design", "UI/UX wireframing", "Tech stack selection"],
+          icon: (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect
+                x="3"
+                y="3"
+                width="6"
+                height="6"
+                rx="1.5"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+              <rect
+                x="11"
+                y="3"
+                width="6"
+                height="6"
+                rx="1.5"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+              <rect
+                x="3"
+                y="11"
+                width="6"
+                height="6"
+                rx="1.5"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+              <rect
+                x="11"
+                y="11"
+                width="6"
+                height="6"
+                rx="1.5"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+            </svg>
+          ),
+        },
+        {
+          num: "03",
+          title: "Development\n& Testing",
+          desc: "Agile sprints with continuous integration, code reviews, and rigorous testing — delivering working software on every milestone.",
+          pills: ["Agile sprints", "CI/CD pipelines", "QA & unit testing"],
+          icon: (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M5 8l-3 2 3 2M15 8l3 2-3 2M8 15l4-10"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          ),
+        },
+        {
+          num: "04",
+          title: "Deployment\n& Support",
+          desc: "We handle production deployment, monitoring setup, and provide ongoing support to ensure your system runs flawlessly at scale.",
+          pills: [
+            "Cloud deployment",
+            "Performance monitoring",
+            "Ongoing maintenance",
+          ],
+          icon: (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M10 3v3M14.24 5.76l-2.12 2.12M17 10h-3M14.24 14.24l-2.12-2.12M10 17v-3M5.76 14.24l2.12-2.12M3 10h3M5.76 5.76l2.12 2.12"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+            </svg>
+          ),
+        },
+      ];
+
+      function Process({ accent, cardRadius }) {
+        const ref = useReveal(80);
+        const [active, setActive] = useState(null);
+        return (
+          <section id="process" className="process-section section-pad">
+            <div className="process-dots" />
+            <div
+              className="container"
+              ref={ref}
+              style={{ position: "relative", zIndex: 1 }}
+            >
+              <div style={{ textAlign: "center", marginBottom: 44 }}>
+                <div className="section-label" style={{ color: accent }}>
+                  How We Work
+                </div>
+                <h2 className="section-h">Our Process</h2>
+                <p
+                  style={{
+                    color: "#7a7a8a",
+                    fontSize: 14,
+                    lineHeight: 1.7,
+                    marginTop: 10,
+                  }}
+                >
+                  A structured, transparent approach — from first conversation
+                  to live product.
+                </p>
+              </div>
+              <div
+                className="process-grid"
+                style={{ borderRadius: cardRadius }}
+              >
+                {PROCESS_STEPS.map((s, i) => (
+                  <div
+                    key={i}
+                    className="process-card"
+                    onMouseEnter={() => setActive(i)}
+                    onMouseLeave={() => setActive(null)}
+                  >
+                    <div className="process-num">{s.num}</div>
+                    <div
+                      className="process-icon-wrap"
+                      style={{
+                        background: active === i ? `${accent}18` : "#f2f2ef",
+                        color: active === i ? accent : "#9090a0",
+                        transition: "background 0.2s, color 0.2s",
+                      }}
+                    >
+                      {s.icon}
+                    </div>
+                    <div
+                      className="process-title"
+                      style={{ whiteSpace: "pre-line" }}
+                    >
+                      {s.title}
+                    </div>
+                    <div className="process-desc">{s.desc}</div>
+                    <div className="process-pills">
+                      {s.pills.map((p) => (
+                        <div key={p} className="process-pill">
+                          <div
+                            className="process-pill-dot"
+                            style={{
+                              background: active === i ? accent : "#c0c0c8",
+                              transition: "background 0.2s",
+                            }}
+                          />
+                          {p}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ── PORTFOLIO ────────────────────────────────────────────
+      const PROJECTS = [
+        {
+          title: "CraftQuote: Interiors Invoice Automation",
+          client: "Multi-Tenant SaaS Platform",
+          tags: ["React", "NodeJS", "MongoDB"],
+          type: "SAAS",
+          year: "2026",
+        },
+        {
+          title: "Invoice Management System",
+          client: "Skanda Industries",
+          tags: ["React", "NodeJS", "MongoDB"],
+          type: "Web Platform",
+          year: "2026",
+        },
+        {
+          title: "Exam Portal Application",
+          client: "ScorePath",
+          tags: ["ReactJS", "NodeJS", "MongoDB"],
+          type: "SaaS",
+          year: "2026",
+        },
+        {
+          title: "Disaster Management System",
+          client: "Dr. Vanam Mallikarjun",
+          tags: ["ReactJS", "Flask", "MongoDB"],
+          type: "Web Application",
+          year: "2026",
+        },
+        {
+          title: "School Management System",
+          client: "Oxford High School, USA",
+          tags: ["React", "Spring Boot", "SQL"],
+          type: "Web Application",
+          year: "2025",
+        },
+        {
+          title: "NeuralPort AI Chatbot",
+          client: "Scalable gateway for LLMs",
+          tags: ["React", "Django", "SQL"],
+          type: "AI Platform",
+          year: "2025",
+        },
+      ];
+
+      function Portfolio({ accent, cardRadius }) {
+        const ref = useReveal(60);
+        const [hovered, setHovered] = useState(null);
+        return (
+          <section id="portfolio" className="section-pad">
+            <div className="container" ref={ref}>
+              <div className="portfolio-header">
+                <div>
+                  <div className="section-label" style={{ color: accent }}>
+                    Case Studies
+                  </div>
+                  <h2 className="section-h">Selected Work</h2>
+                </div>
+                <div className="portfolio-count">
+                  {PROJECTS.length} projects
+                </div>
+              </div>
+              <div
+                className="portfolio-grid"
+                style={{ borderRadius: cardRadius }}
+              >
+                {PROJECTS.map((p, i) => (
+                  <div
+                    key={i}
+                    className="proj-card"
+                    onMouseEnter={() => setHovered(i)}
+                    onMouseLeave={() => setHovered(null)}
+                  >
+                    <div className="proj-meta">
+                      <span className="proj-type">{p.type}</span>
+                      <span className="proj-year">{p.year}</span>
+                    </div>
+                    <div className="proj-title">{p.title}</div>
+                    <div className="proj-client">{p.client}</div>
+                    <div className="proj-tags">
+                      {p.tags.map((t) => (
+                        <span
+                          key={t}
+                          className="proj-tag"
+                          style={{
+                            background: `${accent}12`,
+                            color: accent,
+                            borderColor: `${accent}28`,
+                          }}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <div
+                      className="proj-cta"
+                      style={{ color: hovered === i ? accent : "#c0c0c8" }}
+                    >
+                      View Case Study
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                      >
+                        <path
+                          d="M2 6h8M7 3l3 3-3 3"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ── TESTIMONIALS ─────────────────────────────────────────
+      const TESTIMONIALS = [
+        {
+          quote:
+            "PM Software Solutions transformed our legacy systems into a modern, scalable platform. Their team delivered exceptional quality on every milestone.",
+          name: "Dr. Yada Hareesh Kumar",
+          role: "Proprietor",
+          company: "Skanda Industries",
+        },
+        {
+          quote:
+            "From requirements to deployment, their process was seamless. The FastAPI backend they built handles Thousands of requests daily without issue.",
+          name: "Dr. Vanam Mallikarjun",
+          role: "Founder & Senior Instructor",
+          company: "VM Software Solutions",
+        },
+        {
+          quote:
+            "We created CraftQuote, a subscription-based software platform that automates interior invoice generation, and it is already being used by active clients.",
+          name: "CraftQuote",
+          role: "Subscription-Based Software",
+          company: "Interior Invoice Generation",
+        },
+      ];
+
+      function Testimonials({ accent, cardRadius }) {
+        const ref = useReveal(60);
+        return (
+          <section id="testimonials" className="testi-bg section-pad">
+            <div className="container" ref={ref}>
+              <div style={{ textAlign: "center", marginBottom: 44 }}>
+                <div className="section-label" style={{ color: accent }}>
+                  Testimonials
+                </div>
+                <h2 className="section-h">What clients say</h2>
+              </div>
+              <div className="testi-grid">
+                {TESTIMONIALS.map((t, i) => (
+                  <div
+                    key={i}
+                    className="testi-card"
+                    style={{ borderRadius: cardRadius }}
+                  >
+                    <div
+                      className="testi-quote-mark"
+                      style={{ color: `${accent}35` }}
+                    >
+                      &ldquo;
+                    </div>
+                    <p className="testi-text">{t.quote}</p>
+                    <hr className="testi-divider" />
+                    <div className="testi-name">{t.name}</div>
+                    <div className="testi-role">
+                      {t.role} · {t.company}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ── CONTACT ──────────────────────────────────────────────
+      const CONTACT_INFO = {
+        email: "pmsoftwaresolutions03@gmail.com",
+        phones: ["+91 70326 27960", "+91 80741 22800"],
+        address: {
+          line1: "PM Software Solutions",
+          line2: "MGM Road, Beside Honda Showroom",
+          city: "Warangal, Telangana (506002)",
+          country: "India",
+        },
+      };
+
+      function ContactCard({ accent, cardRadius, icon, label, children }) {
+        return (
+          <div
+            style={{
+              background: "#fff",
+              border: "1px solid #e4e4df",
+              borderRadius: cardRadius,
+              padding: "28px 26px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 14,
+              transition: "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "#c0c0ba";
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = "0 10px 28px rgba(0,0,0,0.06)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "#e4e4df";
+              e.currentTarget.style.transform = "none";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 9,
+                  background: `${accent}14`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: accent,
+                  flexShrink: 0,
+                }}
+              >
+                {icon}
+              </div>
+              <div
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#9090a0",
+                }}
+              >
+                {label}
+              </div>
+            </div>
+            {children}
+          </div>
+        );
+      }
+
+      function Contact({ accent, cardRadius }) {
+        const ref = useReveal(60);
+
+        // Responsive grid styles
+        const gridStyles = {
+          display: "grid",
+          gap: "16px",
+        };
+
+        return (
+          <section id="contact" className="section-pad">
+            <div className="container" ref={ref}>
+              <style>
+                {`
+            .contact-responsive-grid {
+              display: grid;
+              gap: 16px;
+            }
+            
+            /* Desktop: 3 columns */
+            @media (min-width: 1025px) {
+              .contact-responsive-grid {
+                grid-template-columns: repeat(3, 1fr);
+              }
+            }
+            
+            /* Tablet: 2 columns */
+            @media (min-width: 769px) and (max-width: 1024px) {
+              .contact-responsive-grid {
+                grid-template-columns: repeat(2, 1fr);
+              }
+            }
+            
+            /* Mobile: 1 column */
+            @media (max-width: 768px) {
+              .contact-responsive-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+              }
+              
+              .contact-card-content {
+                padding: 20px !important;
+              }
+            }
+            
+            /* Small mobile devices */
+            @media (max-width: 480px) {
+              .contact-responsive-grid {
+                gap: 16px;
+              }
+            }
+          `}
+              </style>
+
+              <div style={{ textAlign: "center", marginBottom: 44 }}>
+                <div className="section-label" style={{ color: accent }}>
+                  Contact
+                </div>
+                <h2 className="section-h">Get in touch</h2>
+                <p
+                  style={{
+                    color: "#7a7a8a",
+                    fontSize: 14,
+                    lineHeight: 1.7,
+                    marginTop: 10,
+                    maxWidth: "600px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    padding: "0 20px",
+                  }}
+                >
+                  Ready to start your project? Reach out — we respond within 24
+                  hours.
+                </p>
+              </div>
+
+              <div className="contact-responsive-grid">
+                <ContactCard
+                  accent={accent}
+                  cardRadius={cardRadius}
+                  label="Email Us"
+                  icon={
+                    <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
+                      <rect
+                        x="2"
+                        y="5"
+                        width="16"
+                        height="11"
+                        rx="2"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                      />
+                      <path
+                        d="M2 7l8 5 8-5"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  }
+                >
+                  <a
+                    href={`mailto:${CONTACT_INFO.email}`}
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: accent,
+                      textDecoration: "none",
+                      letterSpacing: "-0.01em",
+                      transition: "opacity 0.2s",
+                      wordBreak: "break-all",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.opacity = "0.7")
+                    }
+                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                  >
+                    {CONTACT_INFO.email}
+                  </a>
+                  <div style={{ fontSize: 12, color: "#9090a0" }}>
+                    We reply within 24 hours
+                  </div>
+                </ContactCard>
+
+                <ContactCard
+                  accent={accent}
+                  cardRadius={cardRadius}
+                  label="Call Us"
+                  icon={
+                    <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
+                      <path
+                        d="M6.5 3.5c.5 1.5 1 3 .5 3.5L5.5 8.5c1 2 2 3 4 4l1.5-1.5c.5-.5 2 0 3.5.5.5 1.5.5 3-.5 3.5C10 17 3 10 3.5 7c.5-1 2-4 3-3.5z"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  }
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 10,
+                    }}
+                  >
+                    {CONTACT_INFO.phones.map((p, i) => (
+                      <a
+                        key={i}
+                        href={`tel:${p.replace(/\D/g, "")}`}
+                        style={{
+                          fontSize: 14,
+                          fontWeight: 600,
+                          color: accent,
+                          textDecoration: "none",
+                          transition: "opacity 0.2s",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.opacity = "0.7")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.opacity = "1")
+                        }
+                      >
+                        <span
+                          style={{
+                            width: 18,
+                            height: 18,
+                            borderRadius: "50%",
+                            background: `${accent}18`,
+                            fontSize: 10,
+                            fontWeight: 700,
+                            color: accent,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexShrink: 0,
+                          }}
+                        >
+                          {i + 1}
+                        </span>
+                        {p}
+                      </a>
+                    ))}
+                  </div>
+                </ContactCard>
+
+                <ContactCard
+                  accent={accent}
+                  cardRadius={cardRadius}
+                  label="Visit Us"
+                  icon={
+                    <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
+                      <path
+                        d="M10 2a6 6 0 0 1 6 6c0 4-6 10-6 10S4 12 4 8a6 6 0 0 1 6-6z"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                      />
+                      <circle
+                        cx="10"
+                        cy="8"
+                        r="2"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                      />
+                    </svg>
+                  }
+                >
+                  <div
+                    style={{ display: "flex", flexDirection: "column", gap: 3 }}
+                  >
+                    {[
+                      CONTACT_INFO.address.line1,
+                      CONTACT_INFO.address.line2,
+                      CONTACT_INFO.address.city,
+                      CONTACT_INFO.address.country,
+                    ].map((l, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          fontSize: i === 0 ? 14 : 13,
+                          fontWeight: i === 0 ? 600 : 400,
+                          color: i === 0 ? "#0d0d12" : "#7a7a8a",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        {l}
+                      </div>
+                    ))}
+                  </div>
+                  <a
+                    href={`https://maps.app.goo.gl/T2c6vwanQqiTNSWX6`}
+                    target="_blank"
+                    rel="noopener"
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: accent,
+                      textDecoration: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 4,
+                      transition: "opacity 0.2s",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.opacity = "0.7")
+                    }
+                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                  >
+                    View on Maps →
+                  </a>
+                </ContactCard>
+              </div>
+            </div>
+          </section>
+        );
+      }
+      // ── FOOTER ───────────────────────────────────────────────
+      function Footer({ accent, cardRadius }) {
+        return (
+          <footer className="footer">
+            <div className="container">
+              <div className="footer-inner">
+                <a
+                  href="#home"
+                  className="nav-logo"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <div
+                    className="nav-logo-mark"
+                    style={{
+                      background: accent,
+                      borderRadius: cardRadius === "4px" ? "4px" : "7px",
+                    }}
+                  >
+                    <svg width="11" height="11" viewBox="0 0 14 14" fill="none">
+                      <rect
+                        x="1"
+                        y="1"
+                        width="5"
+                        height="5"
+                        rx="1"
+                        fill="white"
+                      />
+                      <rect
+                        x="8"
+                        y="1"
+                        width="5"
+                        height="5"
+                        rx="1"
+                        fill="white"
+                        opacity=".5"
+                      />
+                      <rect
+                        x="1"
+                        y="8"
+                        width="5"
+                        height="5"
+                        rx="1"
+                        fill="white"
+                        opacity=".5"
+                      />
+                      <rect
+                        x="8"
+                        y="8"
+                        width="5"
+                        height="5"
+                        rx="1"
+                        fill="white"
+                      />
+                    </svg>
+                  </div>
+                  <span style={{ fontWeight: 600, fontSize: 13 }}>
+                    PM Software Solutions
+                  </span>
+                </a>
+                <span className="footer-copy">
+                  © 2026 PM Software Solutions. All rights reserved.
+                </span>
+                <div className="footer-links">
+                  {["Privacy", "Terms", "LinkedIn"].map((l) => (
+                    <a key={l} href="#" className="footer-link">
+                      {l}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </footer>
+        );
+      }
+
+      // ── APP ──────────────────────────────────────────────────
+      function App() {
+        const [tweaks, setTweaks] = useState(TWEAK_DEFAULTS);
+        const accent = ACCENTS[tweaks.accentIndex].color;
+
+        useEffect(() => {
+          const handler = (e) => {
+            if (e.data?.type === "__activate_edit_mode")
+              document.getElementById("tweaks-panel").classList.add("visible");
+            else if (e.data?.type === "__deactivate_edit_mode")
+              document
+                .getElementById("tweaks-panel")
+                .classList.remove("visible");
+          };
+          window.addEventListener("message", handler);
+          window.parent.postMessage({ type: "__edit_mode_available" }, "*");
+
+          const row = document.getElementById("tw-swatches");
+          if (row && !row.hasChildNodes()) {
+            ACCENTS.forEach((a, i) => {
+              const el = document.createElement("div");
+              el.className =
+                "tw-swatch" + (i === tweaks.accentIndex ? " active" : "");
+              el.style.background = a.hex;
+              el.title = a.label;
+              el.onclick = () => {
+                setTweaks((t) => ({ ...t, accentIndex: i }));
+                document
+                  .querySelectorAll(".tw-swatch")
+                  .forEach((s, j) => s.classList.toggle("active", j === i));
+                window.parent.postMessage(
+                  { type: "__edit_mode_set_keys", edits: { accentIndex: i } },
+                  "*",
+                );
+              };
+              row.appendChild(el);
+            });
+          }
+          const radSel = document.getElementById("tw-radius");
+          if (radSel) {
+            radSel.value = tweaks.cardRadius;
+            radSel.onchange = (e) => {
+              setTweaks((t) => ({ ...t, cardRadius: e.target.value }));
+              window.parent.postMessage(
+                {
+                  type: "__edit_mode_set_keys",
+                  edits: { cardRadius: e.target.value },
+                },
+                "*",
+              );
+            };
+          }
+          return () => window.removeEventListener("message", handler);
+        }, []);
+
+        return (
+          <>
+            <Nav accent={accent} cardRadius={tweaks.cardRadius} />
+            <Hero accent={accent} />
+            <About accent={accent} cardRadius={tweaks.cardRadius} />
+            <Process accent={accent} cardRadius={tweaks.cardRadius} />
+            <Portfolio accent={accent} cardRadius={tweaks.cardRadius} />
+            <Testimonials accent={accent} cardRadius={tweaks.cardRadius} />
+            <Contact accent={accent} cardRadius={tweaks.cardRadius} />
+            <Footer accent={accent} cardRadius={tweaks.cardRadius} />
+          </>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
   </body>
 </html>
